@@ -1,0 +1,351 @@
+/* ---------- Hero ---------- */
+
+.hero {
+  padding-block: clamp(3rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+/* Keep the navigation on the shared wide alignment while bringing the hero's
+   two focal points slightly inward on larger screens. */
+@media (min-width: 1200px) {
+  .heroGrid {
+    padding-inline: clamp(3rem, 4vw, 5rem);
+  }
+}
+
+/* The shared container reaches toward the screen edges on large displays, but
+   display copy still needs a measured line length. This keeps the headline's
+   deliberate three-beat rhythm while the portrait can hold the far edge. */
+.heroCopy {
+  max-width: 50rem;
+}
+
+.heroHeadline {
+  margin-block: 0 1.5rem;
+}
+
+/* Accent only lands on the last of the three verbs, so it reads as emphasis
+   rather than decoration. The mid green rather than the deep one: at this size
+   #2a3c36 sits close enough to --ink to look like a printing error. */
+.heroAccent {
+  color: var(--accent-bright);
+}
+
+.heroStandfirst {
+  max-width: 46ch;
+}
+
+.heroActions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* The hero columns grow with the container on wide screens, but the portrait
+   shouldn't grow with them: past this width the photo starts out-scaling the
+   headline sitting beside it. It holds the right edge of the grid instead. */
+.portrait {
+  width: 100%;
+  /* Sized so the photo's height matches the headline-through-buttons block
+     beside it rather than overhanging it top and bottom. */
+  max-width: 23.5rem;
+  margin-inline-start: auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bone);
+}
+
+.portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1260 / 1450;
+  object-fit: cover;
+}
+
+/* ---------- Credibility strip ---------- */
+
+.credibility {
+  border-block: 1px solid var(--rule);
+  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  background-color: var(--bone-tint);
+}
+
+/* The line sits above the marks rather than beside them: seven logos need the
+   full container width to stay on one row at desktop. */
+.credibilityInner {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.credibilityLine {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.0625rem);
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+
+.companies {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+/* One cap height for the whole row, with a per-logo optical correction so a
+   stacked mark and a long wordmark read at the same size. */
+.logo {
+  height: calc(clamp(1.35rem, 1.9vw, 1.8rem) * var(--logo-scale, 1));
+  width: auto;
+  /* Every mark uses the same quiet neutral treatment, including the client-
+     supplied Seekr artwork, so no original brand colour dominates the row. */
+  filter: grayscale(1) brightness(0);
+  opacity: 0.66;
+}
+
+.companiesMore {
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ---------- Section headers ---------- */
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hint::before {
+  content: "";
+  width: 1.75rem;
+  height: 2px;
+  background: var(--accent-sage);
+}
+
+/* ---------- Proof stats ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-top: 2px solid var(--ink);
+  padding-top: 1.5rem;
+}
+
+/* Sized so the longest figure ("$3.9M → $26.8M") still clears the column on
+   one line; letting it wrap would push that card's body out of line with the
+   other two. */
+.figure {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 0.95rem + 1.85vw, 2.35rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--accent-bright);
+  margin-bottom: 0.9rem;
+  text-wrap: nowrap;
+}
+
+/* Justified so the copy fills the card edge to edge, with the last line
+   centred under the figure rather than left as a short ragged tail. */
+.statBody {
+  font-size: 0.9375rem;
+  color: var(--body);
+  text-align: justify;
+  text-align-last: center;
+  hyphens: auto;
+}
+
+/* ---------- Partnership ---------- */
+
+.partnerBlock + .partnerBlock {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--rule);
+}
+
+.colLabel {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.whoList {
+  --who-gap: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem var(--who-gap);
+}
+
+.whoList li {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1rem + 0.7vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* Hairline separators between roles instead of bullets or commas. Half the gap
+   of padding, pulled back by the same amount, centres the rule in the gap
+   without changing where the words sit. */
+.whoList li + li {
+  padding-left: calc(var(--who-gap) / 2);
+  margin-left: calc(var(--who-gap) / -2);
+  border-left: 1px solid var(--rule);
+}
+
+.disciplineGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+/* The lists used to fade in on scroll and dim on hover. Both are gone: the
+   section is a plain, immediately legible index of what Debbie leads, and the
+   group headers carry her green instead of the motion. */
+.groupLabel {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--accent-bright);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--accent-bright);
+}
+
+.disciplineList li {
+  font-size: 0.9375rem;
+  color: var(--body);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ---------- Ways to work ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: var(--bg);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--ink);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -18px rgb(16 27 51 / 0.4);
+}
+
+.cardTitle {
+  margin-bottom: 0.85rem;
+}
+
+.cardBody {
+  font-size: 0.9375rem;
+  color: var(--body);
+  flex: 1;
+}
+
+.cardLink {
+  margin-top: 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card:hover .cardLink span {
+  transform: translateX(3px);
+}
+
+.cardLink span {
+  transition: transform 0.2s ease;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+  .portrait {
+    max-width: 22rem;
+    margin-inline-start: 0;
+  }
+  .stats,
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .credibilityInner {
+    grid-template-columns: 1fr;
+  }
+  .disciplineGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Once the roles wrap to a second line the rules land at line starts and
+     read as stray marks, so drop them and space the roles out instead. */
+  .whoList li + li {
+    padding-left: 0;
+    margin-left: 0;
+    border-left: 0;
+  }
+  .figure {
+    text-wrap: balance;
+  }
+  /* One column is narrow enough that justification opens rivers of white
+     space, so let the copy run centred and ragged instead. */
+  .statBody {
+    text-align: center;
+    max-width: 48ch;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Two buttons of different widths stacked reads as ragged; matching them
+     gives the hero a clean left and right edge. */
+  .heroActions {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .heroActions :global(.btn) {
+    justify-content: center;
+  }
+  .disciplineGrid {
+    grid-template-columns: 1fr;
+  }
+}

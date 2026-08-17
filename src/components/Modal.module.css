@@ -1,0 +1,103 @@
+.trigger {
+  /* The card's other links are anchors; this one is a button and needs the
+     anchor's box reset before the shared .link styles read correctly. */
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  /* Deliberately no `font` shorthand: the host page's link class supplies the
+     family, size, and weight, and a shorthand here would race it on order. */
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+  /* A button centres its text and shrink-wraps; the sibling links are blocks. */
+  display: block;
+  align-self: start;
+  text-align: left;
+}
+
+.dialog {
+  /* The global reset zeroes margin, which also kills the UA stylesheet's
+     `margin: auto` that centres a modal dialog in the viewport. */
+  margin: auto;
+  width: min(96rem, 100vw - 2rem);
+  max-width: none;
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--bone); /* the campaign artwork's native background */
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.dialog::backdrop {
+  background: rgb(26 38 34 / 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.panel {
+  position: relative;
+  /* The carousel's viewport negates --gutter to bleed its track to the edges,
+     so matching that padding here lands the slides flush with the panel. */
+  padding: clamp(1.75rem, 4vw, 3rem) var(--gutter);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.close {
+  position: absolute;
+  top: clamp(0.75rem, 2vw, 1.25rem);
+  right: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.close:hover {
+  border-color: var(--ink);
+  transform: scale(1.06);
+}
+
+.close svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Leaves room for the close button so the heading never runs under it. */
+.panel :global(.h2) {
+  padding-right: 3rem;
+}
+
+/* ---------- Carousel body ---------- */
+
+/* In a section the carousel can be as tall as it likes and the page scrolls.
+   In a dialog the arrows and dots have to stay reachable without scrolling, so
+   tighten the header block (the carousel's first div child) to buy back room. */
+.panelCarousel > div:first-of-type {
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* The artwork is a fixed 16/10 with object-fit: cover, so capping its height
+   would crop the headline off the top. Cap the slide's *width* instead and let
+   the aspect ratio pick the height — sized so the header, slide, caption, and
+   controls all fit without scrolling. A sticky control row was the alternative,
+   but it covers the captions of the slides passing under it. */
+.panelCarousel ul > li {
+  width: min(88%, 62rem, 60vh);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .close {
+    transition: none;
+  }
+}

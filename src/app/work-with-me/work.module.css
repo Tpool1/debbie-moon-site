@@ -1,0 +1,274 @@
+.hero {
+  padding-block: clamp(2.25rem, 5vw, 4rem) var(--section-y);
+}
+
+/* The h1 runs larger than the h2s the shared head is tuned for, so it needs a
+   little more of the row to itself and a little more leading correction. */
+.heroHead {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 0;
+}
+
+.heroTitle {
+  font-size: clamp(2.15rem, 1rem + 2.25vw, 4rem);
+}
+
+.heroTitle span {
+  display: block;
+  white-space: normal;
+}
+
+.heroAccent {
+  color: var(--accent-bright);
+  margin-top: 0.08em;
+}
+
+.heroBody {
+  padding-top: 0.75rem;
+}
+
+.heroBody p + p {
+  margin-top: 1rem;
+}
+
+/* ---------- Engagements ---------- */
+
+.engagementSectionHead {
+  display: block;
+}
+
+.engagementIntro {
+  max-width: 66ch;
+  margin-top: 1rem;
+}
+
+/* Three abreast rather than three full-width bands: with the scope lists gone
+   each card is short enough that side-by-side is what makes them comparable —
+   format against format, outcome against outcome, read across the row. */
+.engagements {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* head, format, body, ideal situation, outcome — the five rows every card
+     shares, so `subgrid` below can align them across the row. Without it the
+     two-line "Marketing Leadership" title pushes its card's divider and every
+     line under it out of step with the other two. */
+  grid-template-rows: repeat(5, auto);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.engagement {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  /* A subgrid inherits its parent's gaps; without this the card's row gap
+     becomes the 2rem meant to sit *between* cards. */
+  row-gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--bg);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
+  /* Sticky header must not cover the anchor target. */
+  scroll-margin-top: 6rem;
+}
+
+.engagementHead {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+
+.name {
+  font-size: clamp(1.45rem, 1.2rem + 0.9vw, 1.9rem);
+}
+
+.promise {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent-bright);
+}
+
+.structure {
+  display: block;
+  width: fit-content;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 2px solid var(--accent-sage);
+  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.body {
+  color: var(--body);
+  font-size: 0.9375rem;
+}
+
+.bestFor {
+  margin-top: 1.5rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent-sage);
+  color: var(--body);
+  font-size: 0.9375rem;
+}
+
+.bestForLabel {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+/* `margin-top: auto` pins the outcome line to the foot of the card, so the
+   three of them sit on one line across the row however unevenly the bodies
+   above them wrap. */
+.trigger {
+  align-self: end;
+  padding-top: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--accent-bright);
+}
+
+/* ---------- Core capabilities ---------- */
+
+.capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.75rem;
+}
+
+.capabilities li {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ---------- Testimonial ---------- */
+
+.quoteBlock {
+  position: relative;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.quoteMark {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.6;
+  color: var(--accent-sage);
+}
+
+.quote {
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.quoteAttribution {
+  margin-top: 1.25rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.quoteLink {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9375rem;
+}
+
+/* ---------- CTA ---------- */
+
+.cta {
+  max-width: 44rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.ctaBody {
+  margin-top: 1.25rem;
+}
+
+.ctaActions {
+  margin-top: 2rem;
+}
+
+/* ---------- How it works ---------- */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  counter-reset: step;
+}
+
+.step {
+  border-top: 2px solid var(--ink);
+  padding-top: 1.5rem;
+}
+
+.stepNum {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent-bright);
+  margin-bottom: 0.9rem;
+}
+
+.stepName {
+  margin-bottom: 0.6rem;
+}
+
+.stepBody {
+  font-size: 0.9375rem;
+  color: var(--body);
+}
+
+/* Two abreast before one: three cards at tablet width squeeze the bodies into
+   a ladder of two-word lines. */
+@media (max-width: 1040px) {
+  .engagements {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trigger {
+    padding-top: 1.25rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .engagements {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,221 @@
+.hero {
+  padding-block: clamp(2.25rem, 5vw, 4rem) var(--section-y);
+}
+
+.heroHead {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 0;
+}
+
+.heroTitle {
+  font-size: clamp(2.15rem, 1rem + 2.25vw, 4rem);
+}
+
+.heroAccent {
+  color: var(--accent-bright);
+}
+
+.heroBody {
+  max-width: 72ch;
+}
+
+.storySection {
+  border-top: 1px solid var(--rule);
+}
+
+/* Copy wraps around the portrait, per the reference layout. What makes that
+   readable is the cap: the paragraphs below the photo run the full width of
+   this block, so the block itself is what has to stay off the page edges.
+   Left, not centred, so the photo lines up under the heading above it. */
+.story {
+  display: flow-root;
+  max-width: 72rem;
+}
+
+.portrait {
+  float: left;
+  width: clamp(9.5rem, 13vw, 11rem);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 20%;
+  /* An image sits flush to its box; the copy beside it starts a little lower,
+     because its first line carries leading above the cap. */
+  margin: 0.35rem clamp(1.5rem, 2.75vw, 2.5rem) 1.25rem 0;
+  border-radius: var(--radius);
+  background: var(--bone);
+  shape-outside: inset(0 round var(--radius));
+  shape-margin: clamp(1rem, 2vw, 1.75rem);
+}
+
+.story p + p {
+  margin-top: 1.15rem;
+}
+
+/* First paragraph gets a touch more presence without a separate style hook. */
+.story p:first-of-type {
+  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* ---------- Selected work ---------- */
+
+.work {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.workCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* Fixed aspect on the container, not the images, so a one-image card and a
+   three-image card occupy exactly the same height and the titles below them
+   line up across the row. */
+.thumbs {
+  display: grid;
+  gap: 2px;
+  background: var(--rule);
+  aspect-ratio: 16 / 10;
+  /* .workCard is a column flex container, so this is a flex item and its
+     automatic minimum size would otherwise override aspect-ratio. */
+  min-height: 0;
+  flex: none;
+}
+
+.thumbs[data-count="3"] {
+  grid-template-rows: 1.55fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+.thumbs[data-count="3"] img:first-child {
+  grid-column: 1 / -1;
+}
+
+.thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--bone);
+  /* Grid items default to min-height:auto, which lets the image's intrinsic
+     height push past the container's aspect-ratio. */
+  min-height: 0;
+  min-width: 0;
+}
+
+.workBody {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.workKicker {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.workTitle {
+  margin-bottom: 0.85rem;
+}
+
+.workText {
+  font-size: 0.9375rem;
+  color: var(--body);
+  flex: 1;
+}
+
+.workRole {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.workLink {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+/* ---------- Let's talk ---------- */
+
+.talk {
+  max-width: 40rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.talkBody {
+  margin-top: 1.25rem;
+}
+
+.talkActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.talkEmail {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+/* The two secondary links, per the brief: small, below the ask, not competing
+   with the button above them. */
+.talkLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+  margin-top: 2.25rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+}
+
+.talkLinks a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.15rem;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.talkLinks a:hover {
+  color: var(--ink);
+  border-bottom-color: currentColor;
+}
+
+@media (max-width: 900px) {
+  .work {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Below this the column left beside the photo is too narrow to wrap without
+   breaking every line into two or three words. Stack instead. */
+@media (max-width: 820px) {
+  .portrait {
+    float: none;
+    width: min(100%, 14rem);
+    margin: 0 0 1.5rem;
+    shape-outside: none;
+  }
+}

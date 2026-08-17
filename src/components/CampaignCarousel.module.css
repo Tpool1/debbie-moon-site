@@ -1,0 +1,208 @@
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: end;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.title {
+  margin-top: 0.75rem;
+}
+
+.summary {
+  color: var(--body);
+  max-width: 54ch;
+}
+
+.role {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+/* ---------- Track ---------- */
+
+.viewport {
+  /* Break out of the wrap so slides can run to the viewport edge. */
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+.track {
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-inline: var(--gutter);
+  padding-block: 0.25rem;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+}
+
+.slide {
+  flex: 0 0 auto;
+  /* One full slide on phones; a peek of the next one on wider screens so the
+     track reads as scrollable without needing an affordance. */
+  width: min(100%, 62rem);
+  scroll-snap-align: center;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bone);
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .slide {
+    width: min(88%, 62rem);
+  }
+}
+
+.figure {
+  margin: 0;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.85rem;
+  padding: 0.9rem 1.1rem 1.1rem;
+  background: var(--bg);
+  border-top: 1px solid var(--rule);
+}
+
+.molecule {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+}
+
+.sector {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep-teal);
+  background: var(--accent-soft);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.line {
+  flex-basis: 100%;
+  font-size: 0.9375rem;
+  color: var(--muted);
+  /* One line only: the longer headlines otherwise wrap and make the captions
+     different heights, which stops the slides bottom-aligning across the row.
+     The full text is still on the image itself and in the image's alt. */
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Controls ---------- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.arrow {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--ink);
+  color: #fff;
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.arrow svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--rule);
+  cursor: pointer;
+  transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.dot[aria-current="true"] {
+  background: var(--accent);
+  width: 1.5rem;
+}
+
+.counter {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  .head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .dots {
+    display: none;
+  }
+}

@@ -1,0 +1,99 @@
+.list {
+  border-top: 1px solid var(--rule);
+}
+
+.item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.trigger {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  width: 100%;
+  background: none;
+  border: 0;
+  border-left: 2px solid transparent;
+  padding: clamp(1.1rem, 2.2vw, 1.6rem) clamp(3.25rem, 6vw, 5rem);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.item[data-open="true"] .trigger {
+  border-left-color: var(--accent);
+  background: var(--bone-tint);
+}
+
+.problem {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.98rem + 0.62vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.plus {
+  position: absolute;
+  right: clamp(1rem, 2vw, 1.5rem);
+  top: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: -0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+  overflow: visible;
+}
+
+.item[data-open="true"] .plus {
+  color: var(--accent);
+}
+
+.plusStem {
+  transform-origin: 12px 12px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Collapsing the stem onto the bar rather than fading it alone keeps the two
+   strokes reading as one mark through the transition. */
+.item[data-open="true"] .plusStem {
+  transform: scaleY(0) rotate(90deg);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plusStem {
+    transition: none;
+  }
+}
+
+/* Animating grid-template-rows from 0fr to 1fr gets a height transition
+   without measuring the panel in JavaScript. */
+.panelOuter {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.item[data-open="true"] .panelOuter {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  overflow: hidden;
+}
+
+.approach {
+  padding: clamp(0.4rem, 1vw, 0.75rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(1.2rem, 2.4vw, 1.75rem);
+  max-width: 58ch;
+  margin-inline: auto;
+  text-align: center;
+  color: var(--body);
+  font-size: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+}

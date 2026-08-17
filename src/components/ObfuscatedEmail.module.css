@@ -1,0 +1,7 @@
+/* Renders a reversed string in the correct visual order. Only ever seen
+   before hydration or with JavaScript disabled. */
+.reversed {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  display: inline-block;
+}
