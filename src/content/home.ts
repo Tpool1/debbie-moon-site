@@ -53,7 +53,7 @@ export const credibility = {
       src: "/images/logos/cisco.webp",
       width: 304,
       height: 160,
-      scale: 1.24,
+      scale: 1.5,
     },
     {
       name: "Hitachi Vantara",
@@ -74,7 +74,7 @@ export const credibility = {
       src: "/images/logos/noble-ai.webp",
       width: 654,
       height: 160,
-      scale: 1.08,
+      scale: 1.3,
     },
     {
       name: "Seekr",
